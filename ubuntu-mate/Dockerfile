@@ -7,24 +7,25 @@ ARG SWITCHER_VERSION="0.7.2"
 ARG SWITCHER_OS=linux
 USER root
 
-RUN  apt update \
-  && apt upgrade -y \
+RUN  apt-get update \
+  && apt-get upgrade -y \
   && apt-get install wget gpg -y \
   && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg \
   && install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg \
   && sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' \
   && rm -f packages.microsoft.gpg \
-  && apt install apt-transport-https -y \
-  && apt update \
-  && apt install code -y
+  && apt-get install apt-transport-https -y \
+  && apt-get update \
+  && apt-get install code -y
+
+
+RUN echo "------------------------------------------------------ switcher" \
+  && curl -L -o /usr/local/bin/switcher https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switcher_${SWITCHER_OS}_amd64 \
+  && chmod +x /usr/local/bin/switcher \
+  && curl -L -o  /usr/local/bin/switch.sh https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switch.sh \
+  && chmod +x /usr/local/bin/switch.sh
 
 USER abc
-RUN echo "------------------------------------------------------ switcher" \
-  && sudo curl -L -o /usr/local/bin/switcher https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switcher_${SWITCHER_OS}_amd64 \
-  && sudo chmod +x /usr/local/bin/switcher \
-  && sudo curl -L -o  /usr/local/bin/switch.sh https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switch.sh \
-  && sudo chmod +x /usr/local/bin/switch.sh
-
 RUN echo "source /usr/local/bin/switch.sh" >> ~/.bashrc
 # Install codeserver extensions 
 RUN echo "------------------------------------------------------ common extensions" \
