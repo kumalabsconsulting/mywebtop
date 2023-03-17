@@ -8,7 +8,7 @@ ARG SWITCHER_OS=linux
 USER root
 
 RUN  apt-get update \
-  && apt-get upgrade -y \
+#  && apt-get upgrade -y \
   && apt-get install wget gpg -y \
   && wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg \
   && install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg \
@@ -26,7 +26,7 @@ RUN echo "------------------------------------------------------ switcher" \
   && chmod +x /usr/local/bin/switch.sh
 
 USER abc
-RUN echo "source /usr/local/bin/switch.sh" >> ~/.bashrc
+RUN echo "source /usr/local/bin/switch.sh" >> /config/.bashrc
 # Install codeserver extensions 
 RUN echo "------------------------------------------------------ common extensions" \
     && code --install-extension  mhutchie.git-graph \
