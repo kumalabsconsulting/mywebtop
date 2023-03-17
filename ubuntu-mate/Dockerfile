@@ -53,12 +53,6 @@ RUN sudo DEBIAN_FRONTEND=noninteractive apt-get update \
     && echo "------------------------------------------------------ ansible" \
     && pip install ansible \
     && pip install cffi \
-    && echo "------------------------------------------------------ ansible-ara" \
-    && pip install ara \
-    && pip install "ara[server]" \
-    && mkdir -p /home/abc/.ara/server \
-    && ara-manage makemigrations \
-    && ara-manage migrate \
     && echo "------------------------------------------------------ ansible-lint" \
     && pipx install "ansible-lint[yamllint]" \
     && echo "------------------------------------------------------ ansible-doctor" \
