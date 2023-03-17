@@ -18,12 +18,13 @@ RUN  apt update \
   && apt update \
   && apt install code -y
 
-RUN echo "------------------------------------------------------ switcher" \
-  && curl -L -o /usr/local/bin/switcher https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switcher_${SWITCHER_OS}_amd64 \
-  && chmod +x /usr/local/bin/switcher \
-  && curl -L -o  /usr/local/bin/switch.sh https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switch.sh \
-  && chmod +x /usr/local/bin/switch.sh
 USER abc
+RUN echo "------------------------------------------------------ switcher" \
+  && sudo curl -L -o /usr/local/bin/switcher https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switcher_${SWITCHER_OS}_amd64 \
+  && sudo chmod +x /usr/local/bin/switcher \
+  && sudo curl -L -o  /usr/local/bin/switch.sh https://github.com/danielfoehrKn/kubeswitch/releases/download/${VERSION}/switch.sh \
+  && sudo chmod +x /usr/local/bin/switch.sh
+
 RUN echo "source /usr/local/bin/switch.sh" >> ~/.bashrc
 # Install codeserver extensions 
 RUN echo "------------------------------------------------------ common extensions" \
