@@ -65,7 +65,8 @@ RUN echo "------------------------------------------------------ ansible" \
 
 #RUN echo "source /usr/local/bin/switch.sh" >> /config/.bashrc
 # Install codeserver extensions 
-RUN echo "------------------------------------------------------ common extensions" \
+RUN ls -l /config/ \
+    && echo "------------------------------------------------------ common extensions" \
     && code --install-extension  mhutchie.git-graph \
     && code --install-extension  redhat.vscode-yaml \
     && code --install-extension  mechatroner.rainbow-csv \
