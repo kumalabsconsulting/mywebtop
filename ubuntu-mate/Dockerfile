@@ -49,8 +49,7 @@ RUN chmod 755  /home/abc/get_terraform.sh \
 # Continue as usual non-root user
 USER abc
 # Ansible apps & tools
-RUN sudo DEBIAN_FRONTEND=noninteractive apt-get update \
-    && echo "------------------------------------------------------ ansible" \
+RUN echo "------------------------------------------------------ ansible" \
     && pip install ansible \
     && pip install cffi \
     && echo "------------------------------------------------------ ansible-lint" \
