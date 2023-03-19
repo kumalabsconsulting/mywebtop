@@ -1,0 +1,15 @@
+#!/usr/bin/with-contenv bash
+
+if ! dpkg -l | grep gnupg > /dev/null; then
+    apt-get update && apt-get install -y gnupg software-properties-common wget curl ca-certificates
+fi
+
+if [ ! -f "/etc/apt/sources.list.d/kubernetes.list" ]; then
+    echo "**** Adding kubernetes packages to install list ****"
+    curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | \
+     tee /etc/apt/sources.list.d/kubernetes.list
+    echo "kubernetes" >> /mod-repo-packages-to-install.list
+else
+    echo "**** kubernetes packages already installed, skipping ****"
+fi

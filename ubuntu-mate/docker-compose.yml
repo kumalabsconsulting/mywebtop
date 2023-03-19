@@ -2,7 +2,8 @@
 version: ""
 services:
   mywebtop:
-    image: redbeard28/mywebtop:0.1
+    image: redbeard28/mywebtop-ubuntu-mate:0.0.1
+    #image: lscr.io/linuxserver/webtop:ubuntu-mate
     container_name: webtop
     networks:
       - mynet
@@ -16,12 +17,13 @@ services:
       - KEYBOARD=fr-fr-azerty #optional
       - TITLE=Kumalabs #optional
       - AUTO_LOGIN=false
-      - FILE__PASSWORD="./wetopsecret"
+      - FILE__PASSWORD="${PWD}/webtopsecret"
     volumes:
       - ./mywebtop/home:/config
       - /var/run/docker.sock:/var/run/docker.sock #optional
     ports:
-      - 3000:3000
+      - 3000:3000 # guacamole
+      - 3010:3010 # openvscode
 # JUSTE ON LINUX
 #    devices:
 #      - /dev/dri:/dev/dri #optional

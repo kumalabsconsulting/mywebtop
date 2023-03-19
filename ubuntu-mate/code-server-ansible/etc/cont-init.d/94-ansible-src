@@ -1,0 +1,10 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+source /etc/lsb-release
+
+[[ ! -f "/etc/apt/sources.list.d/ansible-ubuntu-ansible-$(lsb_release -cs).list" ]] &&
+  echo "------------------ Add Ansible  sources"
+  apt-get update
+  apt-get install -y gnupg software-properties-common wget curl
+  apt-add-repository ppa:ansible/ansible -y

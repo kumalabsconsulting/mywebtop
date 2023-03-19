@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bash
+
+if ! dpkg -l | grep gnupg > /dev/null; then
+    apt-get update && apt-get install -y gnupg software-properties-common wget curl
+fi
+
+if [ ! -f "/etc/apt/sources.list.d/ansible.list" ]; then
+    echo "**** Adding ansible packages to install list ****"
+    apt-add-repository ppa:ansible/ansible -y
+    echo "ansible" >> /mod-repo-packages-to-install.list
+else
+    echo "**** Ansible packages already installed, skipping ****"
+fi

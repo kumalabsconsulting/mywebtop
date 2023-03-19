@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+source /etc/lsb-release
+
+[[ ! -f "/etc/apt/sources.list.d/kubernetes.list" ]] &&
+  echo "------------------ Add Kubernetes  sources"
+  apt-get install -y ca-certificates
+  curl -fsSLo /etc/apt/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | \
+   tee /etc/apt/sources.list.d/kubernetes.list

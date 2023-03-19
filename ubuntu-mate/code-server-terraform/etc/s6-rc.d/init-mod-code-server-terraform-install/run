@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv bash
+while fuser /var/lib/apt/lists/lock > /dev/null ; do
+    sleep 10
+done 
+while fuser /var/lib/dpkg/lock-frontend > /dev/null ; do
+    sleep 10
+done  
+apt-get install -y terraform

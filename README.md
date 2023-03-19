@@ -34,3 +34,7 @@ cd mywebtop
 docker compose up -d
 ```
 
+## Fonctionnement
+Au chargement du container, l'installation est lancé par le s6-rc.
+Plus il y aura de custom-init, plus se sera long.
+
