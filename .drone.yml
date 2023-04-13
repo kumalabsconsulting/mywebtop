@@ -18,3 +18,17 @@ steps:
     tags: 0.0.1
     context: "ubuntu-mate"
     dockerfile: "ubuntu-mate/Dockerfile"
+- name: build_mywebtop_ubuntu_xfce
+  when:
+    branch: main
+  image: plugins/docker
+  settings:
+    dockerfile: Dockerfile
+    username:
+      from_secret: DOCKERHUB_USER
+    password:
+      from_secret: DOCKERHUB_PASSWORD
+    repo: redbeard28/mywebtop-ubuntu-xfce
+    tags: 0.0.1
+    context: "ubuntu-xfce"
+    dockerfile: "ubuntu-xfce/Dockerfile"
